@@ -1,0 +1,164 @@
+.mainSetup {
+  display: grid;
+  grid-template-rows: auto 3fr 1fr;
+  height: 100%;
+}
+
+.mainTitle {
+  /* https://codepen.io/MarkBoots/pen/JjeNRyX */
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 0.075ch;
+  color: #ff805e;
+  text-align: center;
+
+  --light-pos-x: 1;
+  --light-pos-y: -1;
+
+  --rim-size: 0.02ch;
+  --shadow-offset: 0.2ch;
+  --shadow-blur: 0.1ch;
+
+  text-shadow:
+    calc(max(var(--rim-size), 1px) * var(--light-pos-x))
+      calc(max(var(--rim-size), 1px) * var(--light-pos-y)) #ffd0b8,
+    calc(max(var(--rim-size), 1px) * var(--light-pos-x) * -1)
+      calc(max(var(--rim-size), 1px) * var(--light-pos-y) * -1) #c64d4a,
+    calc(var(--shadow-offset) * var(--light-pos-x) * -1)
+      calc(var(--shadow-offset) * var(--light-pos-y) * -1) var(--shadow-blur)
+      #21091f;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputGroup {
+  width: 100%;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff805e;
+  text-shadow:
+    0 0 3px rgb(255 128 94 / 30%),
+    0 0 18px rgb(255 128 94 / 50%);
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.nameInput {
+  box-sizing: border-box;
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 1.25rem;
+
+  border: 3px solid #ff805e;
+  border-radius: 9999px;
+  background: rgb(20 5 19 / 35%);
+  color: #ffffff;
+
+  font-size: 1.5rem;
+  text-align: center;
+
+  box-shadow:
+    0 0 0 3px rgb(255 128 94 / 10%),
+    0 0 18px rgb(255 128 94 / 12%);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.nameInput:focus {
+  outline: none;
+  border-color: #ffad66;
+  background: rgb(20 5 19 / 55%);
+
+  box-shadow:
+    0 0 0 4px rgb(255 173 102 / 18%),
+    0 0 24px rgb(255 128 94 / 28%);
+}
+
+.inputGroup:focus-within label {
+  color: #ffad66;
+  text-shadow:
+    0 0 4px rgb(255 173 102 / 18%),
+    0 0 24px rgb(255 128 94 / 28%);
+}
+
+.imageCarousel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.imageList {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.imageContainer {
+  flex: 1;
+  padding: 1rem;
+
+  --flip-x: 0px;
+  --flip-y: 0px;
+  --scale: 1;
+  --start-scale: var(--scale);
+  --lift: 0px;
+
+  transform: translate(var(--flip-x), var(--flip-y)) scale(var(--start-scale))
+    translateY(var(--lift));
+
+  transition:
+    transform 450ms ease,
+    opacity 450ms ease;
+}
+
+.imageContainer.aside {
+  --scale: 0.8;
+  --lift: -1rem;
+}
+
+.imageContainer.center {
+  --scale: 1;
+  --lift: 0px;
+}
+
+.imageContainer.exiting {
+  z-index: 10;
+  pointer-events: none;
+
+  --scale: 0.6;
+  --lift: -2rem;
+
+  transition:
+    transform 450ms ease,
+    opacity 450ms ease;
+}
+
+.imageContainer.incoming {
+  z-index: 11;
+  pointer-events: none;
+
+  --scale: 0.8;
+  --lift: -1rem;
+
+  transition:
+    transform 450ms ease,
+    opacity 450ms ease;
+}
