@@ -5,29 +5,14 @@
 }
 
 .mainTitle {
-  /* https://codepen.io/MarkBoots/pen/JjeNRyX */
-  font-size: 2rem;
-  line-height: 1;
-  margin: 0;
-  letter-spacing: 0.075ch;
-  color: #ff805e;
   text-align: center;
-
-  --light-pos-x: 1;
-  --light-pos-y: -1;
-
-  --rim-size: 0.02ch;
-  --shadow-offset: 0.2ch;
-  --shadow-blur: 0.1ch;
-
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-block: 0.5rem;
+  color: #ff805e;
   text-shadow:
-    calc(max(var(--rim-size), 1px) * var(--light-pos-x))
-      calc(max(var(--rim-size), 1px) * var(--light-pos-y)) #ffd0b8,
-    calc(max(var(--rim-size), 1px) * var(--light-pos-x) * -1)
-      calc(max(var(--rim-size), 1px) * var(--light-pos-y) * -1) #c64d4a,
-    calc(var(--shadow-offset) * var(--light-pos-x) * -1)
-      calc(var(--shadow-offset) * var(--light-pos-y) * -1) var(--shadow-blur)
-      #21091f;
+    0 0 3px rgb(255 128 94 / 30%),
+    0 0 18px rgb(255 128 94 / 50%);
 }
 
 .center {
@@ -51,8 +36,7 @@
     0 0 18px rgb(255 128 94 / 50%);
   transition:
     color 180ms ease,
-    text-shadow 180ms ease,
-    background-color 180ms ease;
+    text-shadow 180ms ease;
 }
 
 .nameInput {
@@ -161,4 +145,71 @@
   transition:
     transform 450ms ease,
     opacity 450ms ease;
+}
+
+.imageButton {
+  background: transparent;
+  border: 0;
+  overflow: hidden;
+  border: 3px solid #ff805e;
+  border-radius: 9999px;
+  box-shadow:
+    0 0 0 3px rgb(255 128 94 / 10%),
+    0 0 18px rgb(255 128 94 / 12%);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.imageButton:hover {
+  cursor: pointer;
+  border-color: #ffad66;
+  box-shadow:
+    0 0 0 4px rgb(255 173 102 / 18%),
+    0 0 24px rgb(255 128 94 / 28%);
+}
+
+.imageButton img {
+  display: block;
+  object-fit: cover;
+}
+
+.selectButtons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectName {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #ff805e;
+  text-shadow:
+    0 0 3px rgb(255 128 94 / 30%),
+    0 0 18px rgb(255 128 94 / 50%);
+}
+
+.selectButton {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  color: #ff805e;
+  text-shadow:
+    0 0 3px rgb(255 128 94 / 30%),
+    0 0 18px rgb(255 128 94 / 50%);
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease;
+}
+
+.selectButton:hover {
+  cursor: pointer;
+  color: #ffad66;
+  text-shadow:
+    0 0 4px rgb(255 173 102 / 18%),
+    0 0 24px rgb(255 128 94 / 28%);
 }

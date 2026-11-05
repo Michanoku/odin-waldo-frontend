@@ -8,6 +8,7 @@ function ImageList() {
   // All images and displayed images have a different state
   const [imageData, setImageData] = useState([]);
   const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // This is for the copy of the image fading out to the right
   const [exitingImage, setExitingImage] = useState(null);
@@ -33,6 +34,7 @@ function ImageList() {
       .then((data) => {
         setImageData(data);
         setImages([data.at(-1), data[0], data[1]]);
+        setSelectedImage(data[0]);
       })
       .catch((error) => {
         console.error("Failed to fetch image data:", error);
@@ -252,7 +254,7 @@ function ImageList() {
       // Push the image
       newImages.push(imageData[previousIndex], images[0], images[1]);
     }
-
+    setSelectedImage(newImages[1]);
     // Return the new array
     return newImages;
   };
@@ -285,12 +287,13 @@ function ImageList() {
           />
         )}
       </div>
-      <div className="center">
-        <button onClick={handlePrevious}>
-          <ArrowBigLeft />
+      <div className="selectButtons">
+        <button className="selectButton" onClick={handlePrevious}>
+          <ArrowBigLeft size={64} />
         </button>
-        <button onClick={handleNext}>
-          <ArrowBigRight />
+        <div className="selectName">{selectedImage.name}</div>
+        <button className="selectButton" onClick={handleNext}>
+          <ArrowBigRight size={64} />
         </button>
       </div>
     </div>
