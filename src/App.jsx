@@ -6,20 +6,32 @@ import "./styles/index.css";
 
 function App() {
   // The game has three states, setup, started, finished
-  const [ gameState, setGameState ] = useState("setup")
+  const [gameState, setGameState] = useState("setup");
+  const [gameData, setGameData] = useState(null);
+
+  function startGame(image, userName) {
+    setGameData({ image, userName });
+    setGameState("started");
+  }
 
   const content = {
-    setup: <Setup setGameState={setGameState} />,
-    started: <Started setGameState={setGameState} />,
+    setup: <Setup startGame={startGame} />,
+    started: (
+      <Started
+        setGameState={setGameState}
+        image={gameData.image}
+        userName={gameData.userName}
+      />
+    ),
     finished: <Finished setGameState={setGameState} />,
-  }
+  };
 
   return (
     <>
-        { /* Load 3 different components depending on setup, started or finished */}        
-        {content[gameState]}
+      {/* Load 3 different components depending on setup, started or finished */}
+      {content[gameState]}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
