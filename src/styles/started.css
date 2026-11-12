@@ -1,10 +1,28 @@
 /* The main element in the started game */
 .mainStarted {
+  position: absolute;
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
   align-items: start;
   width: 100%;
   min-height: 100vh;
+}
+
+.popup {
+  z-index: 100;
+  position: absolute;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.popup.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* The container for the game image */
