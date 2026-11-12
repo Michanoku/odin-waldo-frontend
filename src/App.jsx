@@ -19,8 +19,7 @@ function App() {
     started: (
       <Started
         setGameState={setGameState}
-        image={gameData.image}
-        userName={gameData.userName}
+        gameData={gameData}
       />
     ),
     finished: <Finished setGameState={setGameState} />,

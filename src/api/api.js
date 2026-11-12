@@ -30,3 +30,15 @@ export async function getImageData() {
     const path = "images";
     return contactAPI(path);
 }
+
+export async function startGame(imageId, userName) {
+    const path = "start";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ imageId, userName }),
+    };
+    return contactAPI(path, options);
+}
