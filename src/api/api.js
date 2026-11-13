@@ -31,6 +31,7 @@ export async function getImageData() {
     return contactAPI(path);
 }
 
+// Start the game by sending image id and user name
 export async function startGame(imageId, userName) {
     const path = "start";
     const options = {
@@ -41,4 +42,18 @@ export async function startGame(imageId, userName) {
       body: JSON.stringify({ imageId, userName }),
     };
     return contactAPI(path, options);
+}
+
+// Attempt to tag a character through coordinates and character id
+export async function tagCharacter(xCoord, yCoord, characterId) {
+  const path = "tag";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({ xCoord, yCoord, characterId }),
+  };
+  return contactAPI(path, options);
 }

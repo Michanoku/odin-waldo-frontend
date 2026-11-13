@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { startGame } from "../api/api.js";
+import { startGame, tagCharacter } from "../api/api.js";
 import { Check } from "lucide-react";
 import urls from "../api/urls.js";
 import "../styles/started.css";
@@ -26,17 +26,29 @@ export default function Started({ setGameState, gameData }) {
     });
   }
 
-  function tagCharacter(id) {
-    console.log("Tagged character", id, "in location X:", coordinates.x, "Y:", coordinates.y);
+  async function handleCharacterTag(id) {
+    console.log(
+      "Tagged character",
+      id,
+      "in location X:",
+      coordinates.x,
+      "Y:",
+      coordinates.y,
+    );
     // CALL API AND GET VARIABLE
-    const response = { message: ""}
     setPopupVisible(false);
+    const response = await tagCharacter(coordinates.x, coordinates.y, id);
     if (response.message === "gameover") {
       // the game is over
     } else if (response.message === "correct") {
-      // incorrect tag
+      // Find the found character by its id and add the Found bool so it can be checked off
+      setCharacters((prevCharacters) =>
+        prevCharacters.map((character) =>
+          character.id === id ? { ...character, found: true } : character,
+        ),
+      );
     } else {
-      // correct tag
+      // incorrect tag
     }
     setCoordinates(null);
   }
@@ -143,7 +155,7 @@ export default function Started({ setGameState, gameData }) {
                 !character.found && (
                   <button
                     className="characterButton"
-                    onClick={() => tagCharacter(character.id)}
+                    onClick={async () => await handleCharacterTag(character.id)}
                     key={character.id}
                   >
                     {character.name}
