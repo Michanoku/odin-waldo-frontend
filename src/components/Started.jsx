@@ -30,6 +30,7 @@ export default function Started({ setGameState, gameData }) {
         // TODO: replace this toast with endgame handling
         setToast({ message: "You won the game!", type: "end" });
       } else if (response.message === "correct") {
+        localStorage.setItem("token", response.token);
         // Find the found character by its id and add the Found bool so it can be checked off
         setCharacters((prevCharacters) =>
           prevCharacters.map((character) =>
@@ -39,6 +40,7 @@ export default function Started({ setGameState, gameData }) {
         // Inform user of the success
         setToast({ message: "Character found!", type: "success" });
       } else {
+        localStorage.setItem("token", response.token);
         // Inform the user of the failure
         setToast({ message: "Not here!", type: "failure" });
       }
