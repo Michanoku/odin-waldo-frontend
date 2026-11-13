@@ -1,20 +1,19 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { startGame } from "../api/api.js";
 import { Check } from "lucide-react";
 import urls from "../api/urls.js";
 import "../styles/started.css";
 
+// Started function for the game
 export default function Started({ setGameState, gameData }) {
+  // This saves the character data from the server (no locations included)
   const [characters, setCharacters] = useState([]);
+  // The gameboard image
   const [image, setImage] = useState(null);
+  // Popup data, visible or not, position
   const [popupVisible, setPopupVisible] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({
-    x: 0,
-    y: 0,
-    closeToRight: false,
-    closeToBottom: false,
-    closeToTop: false,
-  });
+  const [popupPosition, setPopupPosition] = useState(null);
+  // The coordinates the player has clicked on
   const [coordinates, setCoordinates] = useState(null);
 
   function movePopup(x, y, closeToRight, closeToBottom, closeToTop) {
@@ -25,6 +24,21 @@ export default function Started({ setGameState, gameData }) {
         setPopupVisible(true);
       });
     });
+  }
+
+  function tagCharacter(id) {
+    console.log("Tagged character", id, "in location X:", coordinates.x, "Y:", coordinates.y);
+    // CALL API AND GET VARIABLE
+    const response = { message: ""}
+    setPopupVisible(false);
+    if (response.message === "gameover") {
+      // the game is over
+    } else if (response.message === "correct") {
+      // incorrect tag
+    } else {
+      // correct tag
+    }
+    setCoordinates(null);
   }
 
   function handleClick(event) {
@@ -56,7 +70,6 @@ export default function Started({ setGameState, gameData }) {
 
     movePopup(clickX, clickY, closeToRight, closeToBottom, closeToTop);
     setCoordinates({ x: originalX, y: originalY });
-    console.log(originalX, originalY);
   }
 
   // This function is used to load the game image so the game can start when everything is loaded
@@ -99,19 +112,21 @@ export default function Started({ setGameState, gameData }) {
 
   return (
     <main className="mainStarted">
-      <div
-        className={`target${popupVisible ? " visible" : ""}`}
-        style={{
-          left: popupPosition.x,
-          top: popupPosition.y,
-        }}
-      ></div>
-      <div
-        className={`popup${popupVisible ? " visible" : ""}`}
-        style={{
-          left: popupPosition.x,
-          top: popupPosition.y,
-          transform: `translate(
+      {popupPosition && (
+        <>
+          <div
+            className={`target${popupVisible ? " visible" : ""}`}
+            style={{
+              left: popupPosition.x,
+              top: popupPosition.y,
+            }}
+          ></div>
+          <div
+            className={`popup${popupVisible ? " visible" : ""}`}
+            style={{
+              left: popupPosition.x,
+              top: popupPosition.y,
+              transform: `translate(
             ${popupPosition.closeToRight ? "-130%" : "30%"},
               ${
                 popupPosition.closeToBottom
@@ -121,17 +136,24 @@ export default function Started({ setGameState, gameData }) {
                     : "-50%"
               }
           )`,
-        }}
-      >
-        {characters.map(
-          (character) =>
-            !character.found && (
-              <button className="characterButton" key={character.id}>
-                {character.name}
-              </button>
-            ),
-        )}
-      </div>
+            }}
+          >
+            {characters.map(
+              (character) =>
+                !character.found && (
+                  <button
+                    className="characterButton"
+                    onClick={() => tagCharacter(character.id)}
+                    key={character.id}
+                  >
+                    {character.name}
+                  </button>
+                ),
+            )}
+          </div>
+        </>
+      )}
+
       <div className="gameBoard">
         <img
           className="gameImage"
