@@ -1,18 +1,17 @@
 :root {
-  --color-bg: #42113c;
-  --color-bg-border: #f95738;
+  --color-bg: #55204d;
   --color-surface: #293f14;
-  --color-surface-alt: #ffffff;
-  --color-text: #000000;
-  --color-muted: #cccccc;
-  --color-accent: #ffffff;
-  --color-accent-hover: #ffffff;
-  --color-border: #ffffff;
+  --color-text: #ffffff;
+  --color-accent: #ff805e;
+  --color-accent-hover: #ffad66;
+  --shadow-text: 0 0 3px rgb(255 128 94 / 30%), 0 0 18px rgb(255 128 94 / 50%);
+  --shadow-box:
+    0 0 0 4px rgb(255 173 102 / 18%), 0 0 24px rgb(255 128 94 / 28%);
+  --shadow-box-dark:
+    0 0 0 3px rgb(255 128 94 / 10%), 0 0 18px rgb(255 128 94 / 12%);
   font-size: 18px;
   line-height: 145%;
   letter-spacing: 0.18px;
-  color: var(--color-text);
-  background: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,8 +31,9 @@
 }
 
 body {
-  max-width: 100vw;
+  width: 100%;
   min-height: 100dvh;
+  margin: 0;
   overflow-x: hidden;
   background:
     radial-gradient(ellipse at 20% 10%, #55204d 0%, transparent 55%),
@@ -41,7 +41,7 @@ body {
 }
 
 main {
-  max-width: 100vw;
+  width: 100%;
   min-height: 100dvh;
 }
 

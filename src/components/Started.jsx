@@ -8,8 +8,8 @@ export default function Started({ setGameState, gameData }) {
   const [characters, setCharacters] = useState([]);
   const [image, setImage] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0});
-  const [coordinates, setCoordinates] = useState(null)
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [coordinates, setCoordinates] = useState(null);
 
   function movePopup(x, y) {
     setPopupVisible(false);
@@ -41,7 +41,7 @@ export default function Started({ setGameState, gameData }) {
     const originalY = clickY * (originalHeight / displayedHeight);
 
     movePopup(clickX, clickY);
-    setCoordinates({ x: originalX, y: originalY});
+    setCoordinates({ x: originalX, y: originalY });
     console.log(originalX, originalY);
   }
 
@@ -86,13 +86,27 @@ export default function Started({ setGameState, gameData }) {
   return (
     <main className="mainStarted">
       <div
+        className={`target${popupVisible ? " visible" : ""}`}
+        style={{
+          left: popupPosition.x,
+          top: popupPosition.y,
+        }}
+      ></div>
+      <div
         className={`popup${popupVisible ? " visible" : ""}`}
         style={{
           left: popupPosition.x,
           top: popupPosition.y,
         }}
       >
-        Your popup
+        {characters.map(
+          (character) =>
+            !character.found && (
+              <button className="characterButton" key={character.id}>
+                {character.name}
+              </button>
+            ),
+        )}
       </div>
       <div className="gameBoard">
         <img

@@ -9,10 +9,8 @@
   font-weight: 600;
   font-size: 2.5rem;
   margin-block: 0.5rem;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
 }
 
 .center {
@@ -30,10 +28,8 @@
   margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
   transition:
     color 180ms ease,
     text-shadow 180ms ease;
@@ -45,17 +41,15 @@
   height: 3.5rem;
   padding: 0 1.25rem;
 
-  border: 3px solid #ff805e;
+  border: 3px solid var(--color-accent);
   border-radius: 9999px;
   background: rgb(20 5 19 / 35%);
-  color: #ffffff;
+  color: var(--color-text);
 
   font-size: 1.5rem;
   text-align: center;
 
-  box-shadow:
-    0 0 0 3px rgb(255 128 94 / 10%),
-    0 0 18px rgb(255 128 94 / 12%);
+  box-shadow: var(--shadow-box-dark);
 
   transition:
     border-color 180ms ease,
@@ -65,19 +59,14 @@
 
 .nameInput:focus {
   outline: none;
-  border-color: #ffad66;
+  border-color: var(--color-accent-hover);
   background: rgb(20 5 19 / 55%);
-
-  box-shadow:
-    0 0 0 4px rgb(255 173 102 / 18%),
-    0 0 24px rgb(255 128 94 / 28%);
+  box-shadow: var(--shadow-box);
 }
 
 .inputGroup:focus-within label {
-  color: #ffad66;
-  text-shadow:
-    0 0 4px rgb(255 173 102 / 18%),
-    0 0 24px rgb(255 128 94 / 28%);
+  color: var(--color-accent-hover);
+  text-shadow: var(--shadow-box);
 }
 
 .imageContainer {
@@ -101,11 +90,9 @@
 .imagePreview {
   background: transparent;
   overflow: hidden;
-  border: 3px solid #ff805e;
+  border: 3px solid var(--color-accent);
   border-radius: 9999px;
-  box-shadow:
-    0 0 0 3px rgb(255 128 94 / 10%),
-    0 0 18px rgb(255 128 94 / 12%);
+  box-shadow: var(--shadow-box-dark);
 }
 
 .imagePreview img {
@@ -125,7 +112,7 @@
 
 .imageRecords {
   padding-inline: 1rem;
-  color: #ff805e;
+  color: var(--color-accent);
   font-weight: 600;
   font-size: 1.5rem;
   display: flex;
@@ -155,10 +142,8 @@
   flex: 1;
   background: transparent;
   border: 0;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
   transition:
     color 180ms ease,
     text-shadow 180ms ease;
@@ -166,8 +151,6 @@
 
 .selectButton:hover {
   cursor: pointer;
-  color: #ffad66;
-  text-shadow:
-    0 0 4px rgb(255 173 102 / 18%),
-    0 0 24px rgb(255 128 94 / 28%);
+  color: var(--color-accent-hover);
+  text-shadow: var(--shadow-box);
 }

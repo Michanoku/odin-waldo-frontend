@@ -1,23 +1,61 @@
 /* The main element in the started game */
 .mainStarted {
-  position: absolute;
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
   align-items: start;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-.popup {
+.target {
   z-index: 100;
   position: absolute;
   opacity: 0;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   transition: opacity 0.25s ease;
   pointer-events: none;
-  width: 100px;
-  height: 100px;
-  background-color: red;
+
+  width: 70px;
+  height: 70px;
+  border: 6px dotted var(--color-accent);
+  border-radius: 50%;
+
+  filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 3px #000);
+}
+
+.target.visible {
+  opacity: 1;
+}
+
+.popup {
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  position: absolute;
+  opacity: 0;
+  transform: translate(2.5rem, -50%);
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  background-color: var(--color-bg);
+  border-radius: 0.375rem;
+  border: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-box-dark);
+}
+
+.characterButton {
+  font-size: 1.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
+}
+
+.characterButton:hover {
+  cursor: pointer;
+  color: var(--color-accent-hover);
+  text-shadow: var(--shadow-box);
 }
 
 .popup.visible {
@@ -29,6 +67,7 @@
 .gameBoard {
   min-width: 0;
   width: 100%;
+  border-right: 3px solid var(--color-accent);
 }
 
 .gameImage {
@@ -80,7 +119,7 @@
   inset: 0;
   width: 70px;
   height: 70px;
-  color: #ff805e;
+  color: var(--color-accent);
 }
 
 .characterImage img {
@@ -90,10 +129,8 @@
   max-width: 100%;
   object-fit: contain;
   border-radius: 0.375rem;
-  border: 3px solid #ff805e;
-  box-shadow:
-    0 0 0 3px rgb(255 128 94 / 10%),
-    0 0 18px rgb(255 128 94 / 12%);
+  border: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-box-dark);
 }
 
 .characterImage img.found {
@@ -104,10 +141,8 @@
   font-size: clamp(12px, 1.2vw, 18px);
   margin: 4px 0;
   text-align: center;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
 }
 
 .sidePanel button {
@@ -118,10 +153,8 @@
   font-size: 1.5rem;
   background: transparent;
   border: 0;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
   transition:
     color 180ms ease,
     text-shadow 180ms ease;
@@ -129,8 +162,6 @@
 
 .quitButton:hover {
   cursor: pointer;
-  color: #ffad66;
-  text-shadow:
-    0 0 4px rgb(255 173 102 / 18%),
-    0 0 24px rgb(255 128 94 / 28%);
+  color: var(--color-accent-hover);
+  text-shadow: var(--shadow-box);
 }

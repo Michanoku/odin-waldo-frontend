@@ -18,10 +18,8 @@
   text-align: center;
   font-weight: 600;
   font-size: 2rem;
-  color: #ff805e;
-  text-shadow:
-    0 0 3px rgb(255 128 94 / 30%),
-    0 0 18px rgb(255 128 94 / 50%);
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
 }
 
 .imageContainer.aside {
@@ -44,11 +42,9 @@
 .imageButton {
   background: transparent;
   overflow: hidden;
-  border: 3px solid #ff805e;
+  border: 3px solid var(--color-accent);
   border-radius: 9999px;
-  box-shadow:
-    0 0 0 3px rgb(255 128 94 / 10%),
-    0 0 18px rgb(255 128 94 / 12%);
+  box-shadow: var(--shadow-box-dark);
 
   transition:
     border-color 180ms ease,
@@ -57,10 +53,8 @@
 
 .imageButton:hover {
   cursor: pointer;
-  border-color: #ffad66;
-  box-shadow:
-    0 0 0 4px rgb(255 173 102 / 18%),
-    0 0 24px rgb(255 128 94 / 28%);
+  border-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-box);
 }
 
 .imageButton img {
