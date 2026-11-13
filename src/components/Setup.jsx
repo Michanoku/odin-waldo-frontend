@@ -62,7 +62,6 @@ function ImageSelect({
 
 function SelectedImage({ selected, setSelected, play }) {
   function showRecords(records) {
-    console.log(records);
     const recordList = records.flat();
     while (recordList.length < 10) {
       recordList.push({ userName: "--", time: "--" });
