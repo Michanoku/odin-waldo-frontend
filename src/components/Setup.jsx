@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { getImageData } from "../api/api.js";
 import { Undo2, Play } from "lucide-react";
-import ImageList from "./ImageList.jsx";
+import ImageList from "./setup/ImageList.jsx";
 import urls from "../api/urls.js";
-import "../styles/setup.css";
+import "../styles/setup/setup.css";
 
 function ImageSelect({
   userName,

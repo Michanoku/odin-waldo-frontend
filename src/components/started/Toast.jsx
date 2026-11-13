@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "../styles/toast.css";
+import "../../styles/started/toast.css";
 
 export default function Toast({toast, setToast}) {
 

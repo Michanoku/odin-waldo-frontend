@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
-import urls from "../api/urls.js";
-import "../styles/sidepanel.css";
+import urls from "../../api/urls.js";
+import "../../styles/started/sidepanel.css";
 
 function CharacterImage({ character }) {
   return (

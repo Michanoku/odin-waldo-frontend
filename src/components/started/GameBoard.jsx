@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/gameboard.css";
+import "../../styles/started/gameboard.css";
 
 // The popup to select a character and name
 function Popup({

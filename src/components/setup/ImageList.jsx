@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect, useRef } from "react";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import urls from "../api/urls.js";
-import "../styles/imageList.css";
+import urls from "../../api/urls.js";
+import "../../styles/setup/imageList.css";
 
 export default function ImageList({
   selectImage,

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import GameBoard from "../components/GameBoard.jsx";
-import SidePanel from "../components/SidePanel.jsx";
-import Toast from "../components/Toast.jsx";
+import GameBoard from "./started/GameBoard.jsx";
+import SidePanel from "./started/SidePanel.jsx";
+import Toast from "./started/Toast.jsx";
 import { startGame, tagCharacter } from "../api/api.js";
 import urls from "../api/urls.js";
-import "../styles/started.css";
+import "../styles/started/started.css";
 
 // Started function for the game
 export default function Started({ setGameState, gameData }) {
