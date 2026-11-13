@@ -164,3 +164,32 @@
   color: var(--color-accent-hover);
   text-shadow: var(--shadow-box);
 }
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  height: 2rem;
+  padding: 0 1.25rem;
+  position: fixed;
+  background: rgb(20 5 19 / 100%);
+  color: var(--color-text);
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-box-dark);
+  border: 3px solid var(--color-accent);
+  max-width: calc(100vw - 2rem);
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.toast.success,
+.toast.failure,
+.toast.end {
+  opacity: 1;
+}

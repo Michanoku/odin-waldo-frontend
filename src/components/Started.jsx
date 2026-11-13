@@ -15,6 +15,8 @@ export default function Started({ setGameState, gameData }) {
   const [popupPosition, setPopupPosition] = useState(null);
   // The coordinates the player has clicked on
   const [coordinates, setCoordinates] = useState(null);
+  // Toast announcing correct or incorrect tag
+  const [toast, setToast] = useState(null)
 
   function movePopup(x, y, closeToRight, closeToBottom, closeToTop) {
     setPopupVisible(false);
@@ -35,11 +37,13 @@ export default function Started({ setGameState, gameData }) {
       "Y:",
       coordinates.y,
     );
-    // CALL API AND GET VARIABLE
+    // Hide the popup
     setPopupVisible(false);
+    // Send tag to API and get the response
     const response = await tagCharacter(coordinates.x, coordinates.y, id);
     if (response.message === "gameover") {
-      // the game is over
+      // TODO: replace this toast with endgame handling
+      setToast({message: "You won the game!", type: "end"});
     } else if (response.message === "correct") {
       // Find the found character by its id and add the Found bool so it can be checked off
       setCharacters((prevCharacters) =>
@@ -47,8 +51,11 @@ export default function Started({ setGameState, gameData }) {
           character.id === id ? { ...character, found: true } : character,
         ),
       );
+      // Inform user of the success
+      setToast({message: "Character found!", type: "success"});
     } else {
-      // incorrect tag
+      // Inform the user of the failure
+      setToast({message: "Not here!", type: "failure"});
     }
     setCoordinates(null);
   }
@@ -190,6 +197,9 @@ export default function Started({ setGameState, gameData }) {
         </div>
         <button className="quitButton">Quit</button>
       </div>
+      {toast &&
+      <div className={`toast ${toast.type}`}>{toast.message}</div>
+      }
     </main>
   );
 }
