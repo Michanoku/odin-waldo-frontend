@@ -8,12 +8,18 @@ export default function Started({ setGameState, gameData }) {
   const [characters, setCharacters] = useState([]);
   const [image, setImage] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [popupPosition, setPopupPosition] = useState({
+    x: 0,
+    y: 0,
+    closeToRight: false,
+    closeToBottom: false,
+    closeToTop: false,
+  });
   const [coordinates, setCoordinates] = useState(null);
 
-  function movePopup(x, y) {
+  function movePopup(x, y, closeToRight, closeToBottom, closeToTop) {
     setPopupVisible(false);
-    setPopupPosition({ x, y });
+    setPopupPosition({ x, y, closeToRight, closeToBottom, closeToTop });
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setPopupVisible(true);
@@ -40,7 +46,15 @@ export default function Started({ setGameState, gameData }) {
     const originalX = clickX * (originalWidth / displayedWidth);
     const originalY = clickY * (originalHeight / displayedHeight);
 
-    movePopup(clickX, clickY);
+    // Check if we are close to the border
+    const spaceRight = displayedWidth - clickX;
+    const spaceBottom = displayedHeight - clickY;
+
+    const closeToRight = spaceRight < 200;
+    const closeToBottom = spaceBottom < 150;
+    const closeToTop = clickY < 150;
+
+    movePopup(clickX, clickY, closeToRight, closeToBottom, closeToTop);
     setCoordinates({ x: originalX, y: originalY });
     console.log(originalX, originalY);
   }
@@ -97,6 +111,16 @@ export default function Started({ setGameState, gameData }) {
         style={{
           left: popupPosition.x,
           top: popupPosition.y,
+          transform: `translate(
+            ${popupPosition.closeToRight ? "-130%" : "30%"},
+              ${
+                popupPosition.closeToBottom
+                  ? "-130%"
+                  : popupPosition.closeToTop
+                    ? "30%"
+                    : "-50%"
+              }
+          )`,
         }}
       >
         {characters.map(

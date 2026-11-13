@@ -34,8 +34,7 @@
   flex-direction: column;
   z-index: 100;
   position: absolute;
-  opacity: 0;
-  transform: translate(2.5rem, -50%);
+  opacity: 0;  transform: translate(2.5rem, -50%);
   transition: opacity 0.25s ease;
   pointer-events: none;
   background-color: var(--color-bg);
