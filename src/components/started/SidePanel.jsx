@@ -17,15 +17,15 @@ function CharacterImage({ character }) {
   );
 }
 
-function QuitButton({ quit }) {
+function QuitButton({ resetGame }) {
   return (
-    <button className="quitButton" onClick={quit}>
+    <button className="quitButton" onClick={resetGame}>
       Quit
     </button>
   );
 }
 
-export default function SidePanel({ characters, quit }) {
+export default function SidePanel({ characters, resetGame }) {
   return (
     <div className="sidePanel">
       <div className="characterList">
@@ -33,7 +33,7 @@ export default function SidePanel({ characters, quit }) {
           <CharacterImage character={character} key={character.id} />
         ))}
       </div>
-      <QuitButton quit={quit} />
+      <QuitButton resetGame={resetGame} />
     </div>
   );
 }

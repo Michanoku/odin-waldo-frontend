@@ -7,7 +7,7 @@ import urls from "../api/urls.js";
 import "../styles/started/started.css";
 
 // Started function for the game
-export default function Started({ setGameState, gameData }) {
+export default function Started({ gameData, resetGame, finishGame }) {
   // This saves the character data from the server (no locations included)
   const [characters, setCharacters] = useState([]);
   // The gameboard image
@@ -17,18 +17,12 @@ export default function Started({ setGameState, gameData }) {
   // Toast announcing correct or incorrect tag
   const [toast, setToast] = useState(null);
 
-  function quit() {
-    localStorage.removeItem("token");
-    setGameState("setup");
-  }
-
   async function handleCharacterTag(id) {
     try {
       // Send tag to API and get the response
       const response = await tagCharacter(coordinates.x, coordinates.y, id);
       if (response.message === "gameover") {
-        // TODO: replace this toast with endgame handling
-        setToast({ message: "You won the game!", type: "end" });
+        finishGame(response.time);
       } else if (response.message === "correct") {
         localStorage.setItem("token", response.token);
         // Find the found character by its id and add the Found bool so it can be checked off
@@ -98,7 +92,7 @@ export default function Started({ setGameState, gameData }) {
         setCoordinates={setCoordinates}
         handleCharacterTag={handleCharacterTag}
       />
-      <SidePanel characters={characters} quit={quit} />
+      <SidePanel characters={characters} resetGame={resetGame} />
       {toast && <Toast toast={toast} setToast={setToast} />}
     </main>
   );

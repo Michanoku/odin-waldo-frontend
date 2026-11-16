@@ -14,15 +14,31 @@ function App() {
     setGameState("started");
   }
 
+  function finishGame(time) {
+    setGameData((prev) => ({
+      ...prev,
+      time,
+    }));
+    localStorage.removeItem("token");
+    setGameState("finished");
+  }
+
+  function resetGame() {
+    setGameData(null);
+    localStorage.removeItem("token");
+    setGameState("setup");
+  }
+
   const content = {
     setup: <Setup startGame={startGame} />,
     started: (
       <Started
-        setGameState={setGameState}
         gameData={gameData}
+        resetGame={resetGame}
+        finishGame={finishGame}
       />
     ),
-    finished: <Finished setGameState={setGameState} />,
+    finished: <Finished gameData={gameData} resetGame={resetGame} />,
   };
 
   return (
