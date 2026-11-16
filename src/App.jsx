@@ -38,7 +38,7 @@ function App() {
         finishGame={finishGame}
       />
     ),
-    finished: <Finished gameData={gameData} resetGame={resetGame} />,
+    finished: <Finished gameData={gameData} resetGame={resetGame} restartGame={() => startGame(gameData.image, gameData.userName)} />,
   };
 
   return (
