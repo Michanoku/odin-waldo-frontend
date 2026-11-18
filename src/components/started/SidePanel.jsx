@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, LogOut } from "lucide-react";
 import urls from "../../api/urls.js";
 import "../../styles/started/sidepanel.css";
 
@@ -20,7 +20,7 @@ function CharacterImage({ character }) {
 function QuitButton({ resetGame }) {
   return (
     <button className="quitButton" onClick={resetGame}>
-      Quit
+      <LogOut size={64} />
     </button>
   );
 }

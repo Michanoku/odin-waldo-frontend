@@ -22,7 +22,7 @@ export default function Started({ gameData, resetGame, finishGame }) {
       // Send tag to API and get the response
       const response = await tagCharacter(coordinates.x, coordinates.y, id);
       if (response.message === "gameover") {
-        finishGame(response.time);
+        finishGame(response.time, response.rank);
       } else if (response.message === "correct") {
         localStorage.setItem("token", response.token);
         // Find the found character by its id and add the Found bool so it can be checked off

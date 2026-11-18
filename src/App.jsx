@@ -14,10 +14,11 @@ function App() {
     setGameState("started");
   }
 
-  function finishGame(time) {
+  function finishGame(time, rank) {
     setGameData((prev) => ({
       ...prev,
       time,
+      rank,
     }));
     localStorage.removeItem("token");
     setGameState("finished");

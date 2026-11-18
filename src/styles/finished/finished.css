@@ -1,0 +1,29 @@
+.mainFinished {
+  display: grid;
+  padding: 1rem;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  gap: 1rem;
+}
+
+.finishedText {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.finishedTime {
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.finishedRecords {
+    justify-content: center;
+}

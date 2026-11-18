@@ -13,12 +13,6 @@
   text-shadow: var(--shadow-text);
 }
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .inputGroup {
   width: 100%;
 }
@@ -108,49 +102,4 @@
   height: 100%;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
-}
-
-.imageRecords {
-  padding-inline: 1rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.recordEntry {
-  line-height: 1.15;
-  display: grid;
-  grid-template-columns: 3ch 6ch minmax(0, 1fr);
-}
-
-.recordEntry span:last-child {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.selectButtons {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.selectButton {
-  flex: 1;
-  background: transparent;
-  border: 0;
-  color: var(--color-accent);
-  text-shadow: var(--shadow-text);
-  transition:
-    color 180ms ease,
-    text-shadow 180ms ease;
-}
-
-.selectButton:hover {
-  cursor: pointer;
-  color: var(--color-accent-hover);
-  text-shadow: var(--shadow-box);
 }
