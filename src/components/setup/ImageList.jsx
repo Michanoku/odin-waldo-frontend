@@ -3,6 +3,85 @@ import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import urls from "../../api/urls.js";
 import "../../styles/setup/imageList.css";
 
+// The thumb for an image in the image selector
+function ImageThumb({
+  selectImage,
+  image,
+  index,
+  imageRefs,
+  exiting = false,
+  exitingRef,
+  onExitComplete,
+  handleNext,
+  handlePrevious,
+}) {
+  const clickAction = {
+    0: handlePrevious,
+    1: () => selectImage(image),
+    2: handleNext,
+  };
+  return (
+    <div
+      ref={(element) => {
+        // If exiting image store element
+        if (exiting) {
+          if (exitingRef) exitingRef.current = element;
+          return;
+        }
+        // Store image element in map, with id
+        if (element) {
+          imageRefs.current.set(image.id, element);
+        } else {
+          // Remove the from map on unmount
+          imageRefs.current.delete(image.id);
+        }
+      }}
+      // Apply the correct styles when rendering, using classes
+      className={`imageContainer ${index !== 1 ? "aside" : ""} ${
+        exiting ? "exiting" : ""
+      }`}
+      onTransitionEnd={(event) => {
+        // Wait for fadeout before removing
+        if (exiting && event.propertyName === "opacity") {
+          onExitComplete?.();
+        }
+      }}
+    >
+      <button
+        className="imageButton"
+        onClick={clickAction[index]}
+        data-id={image.id}
+        data-image={`${urls.backend}${image.imageUrl}`}
+        data-records={image.records}
+        disabled={exiting}
+      >
+        <img
+          src={`${urls.backend}${image.thumbUrl}`}
+          width={300}
+          height={200}
+          alt={image.name}
+        />
+      </button>
+    </div>
+  );
+}
+
+// The buttons to select the next or previous image
+function SelectButtons({ handlePrevious, handleNext, name }) {
+  return (
+    <div className="selectButtons">
+      <button className="selectButton" onClick={handlePrevious}>
+        <ArrowBigLeft size={64} />
+      </button>
+      <div className="selectName">{name}</div>
+      <button className="selectButton" onClick={handleNext}>
+        <ArrowBigRight size={64} />
+      </button>
+    </div>
+  );
+}
+
+// The image list where the user can select an image to play with
 export default function ImageList({
   selectImage,
   imageData,
@@ -278,77 +357,11 @@ export default function ImageList({
           />
         )}
       </div>
-      <div className="selectButtons">
-        <button className="selectButton" onClick={handlePrevious}>
-          <ArrowBigLeft size={64} />
-        </button>
-        <div className="selectName">{selectedImage.name}</div>
-        <button className="selectButton" onClick={handleNext}>
-          <ArrowBigRight size={64} />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function ImageThumb({
-  selectImage,
-  image,
-  index,
-  imageRefs,
-  exiting = false,
-  exitingRef,
-  onExitComplete,
-  handleNext,
-  handlePrevious,
-}) {
-  const clickAction = {
-    0: handlePrevious,
-    1: () => selectImage(image),
-    2: handleNext,
-  };
-  return (
-    <div
-      ref={(element) => {
-        // If exiting image store element
-        if (exiting) {
-          if (exitingRef) exitingRef.current = element;
-          return;
-        }
-        // Store image element in map, with id
-        if (element) {
-          imageRefs.current.set(image.id, element);
-        } else {
-          // Remove the from map on unmount
-          imageRefs.current.delete(image.id);
-        }
-      }}
-      // Apply the correct styles when rendering, using classes
-      className={`imageContainer ${index !== 1 ? "aside" : ""} ${
-        exiting ? "exiting" : ""
-      }`}
-      onTransitionEnd={(event) => {
-        // Wait for fadeout before removing
-        if (exiting && event.propertyName === "opacity") {
-          onExitComplete?.();
-        }
-      }}
-    >
-      <button
-        className="imageButton"
-        onClick={clickAction[index]}
-        data-id={image.id}
-        data-image={`${urls.backend}${image.imageUrl}`}
-        data-records={image.records}
-        disabled={exiting}
-      >
-        <img
-          src={`${urls.backend}${image.thumbUrl}`}
-          width={300}
-          height={200}
-          alt={image.name}
-        />
-      </button>
+      <SelectButtons
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        name={selectedImage.name}
+      />
     </div>
   );
 }
