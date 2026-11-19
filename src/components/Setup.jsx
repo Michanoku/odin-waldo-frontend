@@ -5,6 +5,29 @@ import ImageList from "./setup/ImageList.jsx";
 import urls from "../api/urls.js";
 import "../styles/setup/setup.css";
 
+// Let's the player input their username, defaults to saved username if present
+function UserName({ userName, setUserName }) {
+  <div className="center">
+    <div className="inputGroup">
+      <label htmlFor="nameInput">Player Name</label>
+      <input
+        className="nameInput"
+        ref={nameInputRef}
+        id="nameInput"
+        type="text"
+        defaultValue={userName}
+        onChange={(event) => {
+          setUserName(event.target.value);
+          localStorage.setItem("userName", event.target.value);
+        }}
+        minLength={3}
+        maxLength={32}
+        required
+      />
+    </div>
+  </div>;
+}
+
 function ImageSelect({
   userName,
   setUserName,
@@ -37,29 +60,52 @@ function ImageSelect({
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
       />
-      <div className="center">
-        <div className="inputGroup">
-          <label htmlFor="nameInput">Player Name</label>
-          <input
-            className="nameInput"
-            ref={nameInputRef}
-            id="nameInput"
-            type="text"
-            defaultValue={userName}
-            onChange={(event) => {
-              setUserName(event.target.value);
-              localStorage.setItem("userName", event.target.value);
-            }}
-            minLength={3}
-            maxLength={32}
-            required
-          />
-        </div>
-      </div>
+      <UserName userName={userName} setUserName={setUserName} />
     </>
   );
 }
 
+// Showing the selected image
+function SelectedImage({ src, name }) {
+  return (
+    <div className="imageContainer">
+      <div className="imagePreview">
+        <img src={src} width={300} height={200} alt={name} />
+      </div>
+    </div>
+  );
+}
+
+// The top 10 for the selected image
+function ImageRecords({ records }) {
+  return (
+    <div className="imageRecords">
+      {records.map((record, index) => (
+        <div className="recordEntry" key={index}>
+          <span>{index + 1}.</span>
+          <span>{record.time}</span>
+          <span>{record.userName}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// The buttons to play the image or select another one
+function SelectButtons({ setSelected, play }) {
+  return (
+    <div className="selectButtons">
+      <button className="selectButton" onClick={setSelected}>
+        <Undo2 size={64} />
+      </button>
+      <button className="selectButton" onClick={play}>
+        <Play size={64} />
+      </button>
+    </div>
+  );
+}
+
+// Showing the image currently selected to the player, with records
 function SelectedImage({ selected, setSelected, play }) {
   function showRecords(records) {
     const recordList = records.flat();
@@ -74,34 +120,16 @@ function SelectedImage({ selected, setSelected, play }) {
     <>
       <div className="mainTitle">{selected.name}</div>
       <div className="imageInfo">
-        <div className="imageContainer">
-          <div className="imagePreview">
-            <img
-              src={`${urls.backend}${selected.thumbUrl}`}
-              width={300}
-              height={200}
-              alt={selected.name}
-            />
-          </div>
-        </div>
-        <div className="imageRecords">
-          {recordList.map((record, index) => (
-            <div className="recordEntry" key={index}>
-              <span>{index + 1}.</span>
-              <span>{record.time}</span>
-              <span>{record.userName}</span>
-            </div>
-          ))}
-        </div>
+        <SelectedImage
+          src={`${urls.backend}${selected.thumbUrl}`}
+          name={selected.name}
+        />
+        <ImageRecords records={recordList} />
       </div>
-      <div className="selectButtons">
-        <button className="selectButton" onClick={() => setSelected(null)}>
-          <Undo2 size={64} />
-        </button>
-        <button className="selectButton" onClick={() => play(selected)}>
-          <Play size={64} />
-        </button>
-      </div>
+      <SelectButtons
+        setSelected={() => setSelected(null)}
+        play={play(selected)}
+      />
     </>
   );
 }
