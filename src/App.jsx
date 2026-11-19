@@ -9,11 +9,13 @@ function App() {
   const [gameState, setGameState] = useState("setup");
   const [gameData, setGameData] = useState(null);
 
+  // Start the game with the selected image and username
   function startGame(image, userName) {
     setGameData({ image, userName });
     setGameState("started");
   }
 
+  // Finish the game with the time and rank provided by the backend
   function finishGame(time, rank) {
     function showRecords(records, rank, newRecord) {
       // If the player plays subsequent rounds, remove old "new" records.
@@ -52,16 +54,19 @@ function App() {
       time,
       rank,
     }));
+    // Remove token and set game to finished
     localStorage.removeItem("token");
     setGameState("finished");
   }
 
+  // Reset the game by setting data to null, removing token and restarting from setup
   function resetGame() {
     setGameData(null);
     localStorage.removeItem("token");
     setGameState("setup");
   }
 
+  // Decide content based on gameState
   const content = {
     setup: <Setup startGame={startGame} />,
     started: (
