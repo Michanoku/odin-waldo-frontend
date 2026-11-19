@@ -1,28 +1,46 @@
 import { useState } from "react";
 import "../../styles/started/gameboard.css";
 
-// The popup to select a character and name
-function Popup({
-  popupPosition,
+// Target circle to select character
+function Target({ popupVisible, popupPosition }) {
+  return (
+    <div
+      className={`target${popupVisible ? " visible" : ""}`}
+      style={{
+        left: popupPosition.x,
+        top: popupPosition.y,
+      }}
+    ></div>
+  );
+}
+
+// The button with the character name to select from the menu
+function CharacterButton({ character, onClick }) {
+  return (
+    <button
+      className="characterButton"
+      onClick={() => onClick(character.id)}
+      key={character.id}
+    >
+      {character.name}
+    </button>
+  );
+}
+
+// Character select menu to choose a name after clicking a character
+function CharacterSelect({
   popupVisible,
+  popupPosition,
   characters,
   handleCharacterSelect,
 }) {
   return (
-    <>
-      <div
-        className={`target${popupVisible ? " visible" : ""}`}
-        style={{
-          left: popupPosition.x,
-          top: popupPosition.y,
-        }}
-      ></div>
-      <div
-        className={`popup${popupVisible ? " visible" : ""}`}
-        style={{
-          left: popupPosition.x,
-          top: popupPosition.y,
-          transform: `translate(
+    <div
+      className={`popup${popupVisible ? " visible" : ""}`}
+      style={{
+        left: popupPosition.x,
+        top: popupPosition.y,
+        transform: `translate(
             ${popupPosition.closeToRight ? "-130%" : "30%"},
               ${
                 popupPosition.closeToBottom
@@ -32,21 +50,37 @@ function Popup({
                     : "-50%"
               }
           )`,
-        }}
-      >
-        {characters.map(
-          (character) =>
-            !character.found && (
-              <button
-                className="characterButton"
-                onClick={() => handleCharacterSelect(character.id)}
-                key={character.id}
-              >
-                {character.name}
-              </button>
-            ),
-        )}
-      </div>
+      }}
+    >
+      {characters.map(
+        (character) =>
+          !character.found && (
+            <CharacterButton
+              character={character}
+              onClick={handleCharacterSelect}
+            />
+          ),
+      )}
+    </div>
+  );
+}
+
+// The popup to select a character and name
+function Popup({
+  popupPosition,
+  popupVisible,
+  characters,
+  handleCharacterSelect,
+}) {
+  return (
+    <>
+      <Target popupVisible={popupVisible} popupPosition={popupPosition} />
+      <CharacterSelect
+        popupVisble={popupVisible}
+        popupPosition={popupPosition}
+        characters={characters}
+        handleCharacterSelect={handleCharacterSelect}
+      />
     </>
   );
 }
