@@ -27,21 +27,21 @@ async function contactAPI(path, options) {
 
 // Get all the image data from the backend
 export async function getImageData() {
-    const path = "images";
-    return contactAPI(path);
+  const path = "images";
+  return contactAPI(path);
 }
 
 // Start the game by sending image id and user name
 export async function startGame(imageId, userName) {
-    const path = "start";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ imageId, userName }),
-    };
-    return contactAPI(path, options);
+  const path = "start";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ imageId, userName }),
+  };
+  return contactAPI(path, options);
 }
 
 // Attempt to tag a character through coordinates and character id

@@ -15,8 +15,40 @@ function App() {
   }
 
   function finishGame(time, rank) {
+    function showRecords(records, rank, newRecord) {
+      // If the player plays subsequent rounds, remove old "new" records.
+      const recordList = records.flat().map((record) => ({
+        ...record,
+        new: false,
+      }));
+
+      // If the player ranked in the top 10, add the record to the list
+      if (rank <= 10) {
+        recordList.splice(rank - 1, 0, newRecord);
+      }
+
+      // If there are empty records, add a placeholder
+      while (recordList.length < 10) {
+        recordList.push({ userName: "--", time: "--" });
+      }
+
+      return recordList.slice(0, 10);
+    }
+
+    // Show the records including the players new record
+    const recordList = showRecords(gameData.image.records, rank, {
+      userName: gameData.userName,
+      time: time,
+      new: true,
+    });
+
+    // Update game records
     setGameData((prev) => ({
       ...prev,
+      image: {
+        ...prev.image,
+        records: recordList,
+      },
       time,
       rank,
     }));
@@ -39,7 +71,13 @@ function App() {
         finishGame={finishGame}
       />
     ),
-    finished: <Finished gameData={gameData} resetGame={resetGame} restartGame={() => startGame(gameData.image, gameData.userName)} />,
+    finished: (
+      <Finished
+        gameData={gameData}
+        resetGame={resetGame}
+        restartGame={() => startGame(gameData.image, gameData.userName)}
+      />
+    ),
   };
 
   return (

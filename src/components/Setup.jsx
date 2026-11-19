@@ -85,7 +85,6 @@ function SelectedImage({ selected, setSelected, play }) {
           </div>
         </div>
         <div className="imageRecords">
-          <div className="center">Top 10</div>
           {recordList.map((record, index) => (
             <div className="recordEntry" key={index}>
               <span>{index + 1}.</span>
