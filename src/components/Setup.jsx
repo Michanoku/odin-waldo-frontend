@@ -134,7 +134,7 @@ function SelectedImage({ selected, setSelected, play }) {
       </div>
       <SelectButtons
         setSelected={() => setSelected(null)}
-        play={play(selected)}
+        play={() => play(selected)}
       />
     </>
   );
