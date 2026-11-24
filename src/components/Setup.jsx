@@ -6,7 +6,7 @@ import urls from "../api/urls.js";
 import "../styles/setup/setup.css";
 
 // Let's the player input their username, defaults to saved username if present
-function UserName({ userName, setUserName }) {
+function UserName({ userName, setUserName, nameInputRef }) {
   <div className="center">
     <div className="inputGroup">
       <label htmlFor="nameInput">Player Name</label>
@@ -39,8 +39,8 @@ function ImageSelect({
   selectedImage,
   setSelectedImage,
 }) {
-  const nameInputRef = useRef(null);
 
+  const nameInputRef = useRef(null);
   function selectImage(image) {
     if (!nameInputRef.current.checkValidity()) {
       return window.alert("Please enter a name between 3 and 32 characters.");
@@ -60,7 +60,7 @@ function ImageSelect({
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
       />
-      <UserName userName={userName} setUserName={setUserName} />
+      <UserName userName={userName} setUserName={setUserName} nameInputRef={nameInputRef} />
     </>
   );
 }
