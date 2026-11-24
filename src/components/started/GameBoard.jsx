@@ -76,7 +76,7 @@ function Popup({
     <>
       <Target popupVisible={popupVisible} popupPosition={popupPosition} />
       <CharacterSelect
-        popupVisble={popupVisible}
+        popupVisible={popupVisible}
         popupPosition={popupPosition}
         characters={characters}
         handleCharacterSelect={handleCharacterSelect}
