@@ -328,7 +328,14 @@ export default function ImageList({
 
   // If we don't have any images, show a loading message
   if (!images || (images && images.length === 0)) {
-    return <p>Loading...</p>;
+    return (
+      <div className="loading">
+        <div className="loadingText">Loading...</div>
+        <div className="loadingText">
+          It can take up to 50 seconds for the backend to start up.
+        </div>
+      </div>
+    );
   }
 
   return (
