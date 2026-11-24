@@ -66,7 +66,7 @@ function ImageSelect({
 }
 
 // Showing the selected image
-function SelectedImage({ src, name }) {
+function SelectedImageThumb({ src, name }) {
   return (
     <div className="imageContainer">
       <div className="imagePreview">
@@ -120,7 +120,7 @@ function SelectedImage({ selected, setSelected, play }) {
     <>
       <div className="mainTitle">{selected.name}</div>
       <div className="imageInfo">
-        <SelectedImage
+        <SelectedImageThumb
           src={`${urls.backend}${selected.thumbUrl}`}
           name={selected.name}
         />
