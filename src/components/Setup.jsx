@@ -7,25 +7,27 @@ import "../styles/setup/setup.css";
 
 // Let's the player input their username, defaults to saved username if present
 function UserName({ userName, setUserName, nameInputRef }) {
-  <div className="center">
-    <div className="inputGroup">
-      <label htmlFor="nameInput">Player Name</label>
-      <input
-        className="nameInput"
-        ref={nameInputRef}
-        id="nameInput"
-        type="text"
-        defaultValue={userName}
-        onChange={(event) => {
-          setUserName(event.target.value);
-          localStorage.setItem("userName", event.target.value);
-        }}
-        minLength={3}
-        maxLength={32}
-        required
-      />
+  return (
+    <div className="center">
+      <div className="inputGroup">
+        <label htmlFor="nameInput">Player Name</label>
+        <input
+          className="nameInput"
+          ref={nameInputRef}
+          id="nameInput"
+          type="text"
+          defaultValue={userName}
+          onChange={(event) => {
+            setUserName(event.target.value);
+            localStorage.setItem("userName", event.target.value);
+          }}
+          minLength={3}
+          maxLength={32}
+          required
+        />
+      </div>
     </div>
-  </div>;
+  );
 }
 
 function ImageSelect({
@@ -39,8 +41,8 @@ function ImageSelect({
   selectedImage,
   setSelectedImage,
 }) {
-
   const nameInputRef = useRef(null);
+
   function selectImage(image) {
     if (!nameInputRef.current.checkValidity()) {
       return window.alert("Please enter a name between 3 and 32 characters.");
@@ -60,7 +62,11 @@ function ImageSelect({
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
       />
-      <UserName userName={userName} setUserName={setUserName} nameInputRef={nameInputRef} />
+      <UserName
+        userName={userName}
+        setUserName={setUserName}
+        nameInputRef={nameInputRef}
+      />
     </>
   );
 }
