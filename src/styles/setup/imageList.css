@@ -3,28 +3,50 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  min-width: 0;
 }
 
 .imageList {
   flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
+  min-width: 0;
 }
 
 .selectName {
   flex: 1;
   text-align: center;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--color-accent);
   text-shadow: var(--shadow-text);
+}
+
+.imageContainer {
+  flex: 0 0 auto;
+  padding: 0;
+
+  --flip-x: 0px;
+  --flip-y: 0px;
+  --scale: 1;
+  --start-scale: var(--scale);
+  --lift: 0px;
+
+  transform: translate(var(--flip-x), var(--flip-y)) scale(var(--start-scale))
+    translateY(var(--lift));
+
+  transition:
+    transform 450ms ease,
+    opacity 450ms ease;
 }
 
 .imageContainer.aside {
   --scale: 0.8;
   --lift: -1rem;
+
+  margin-inline: -10vw;
 }
 
 .imageContainer.exiting {
@@ -40,6 +62,10 @@
 }
 
 .imageButton {
+  width: 55vw;
+  max-width: 300px;
+  aspect-ratio: 3 / 2;
+
   background: transparent;
   overflow: hidden;
   border: 3px solid var(--color-accent);
@@ -59,5 +85,34 @@
 
 .imageButton img {
   display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .imageList {
+    justify-content: space-between;
+    overflow: visible;
+  }
+
+  .selectName {
+    font-size: 2rem;
+  }
+
+  .imageContainer {
+    flex: 1;
+    padding: 1rem;
+  }
+
+  .imageContainer.aside {
+    margin-inline: 0;
+  }
+
+  .imageButton {
+    width: 300px;
+    max-width: none;
+    aspect-ratio: 3 / 2;
+  }
 }

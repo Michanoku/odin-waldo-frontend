@@ -74,7 +74,7 @@ function ImageSelect({
 // Showing the selected image
 function SelectedImageThumb({ src, name }) {
   return (
-    <div className="imageContainer">
+    <div className="imagePreviewContainer">
       <div className="imagePreview">
         <img src={src} width={300} height={200} alt={name} />
       </div>
