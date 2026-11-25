@@ -196,3 +196,7 @@ In order to discourage cheating, and not give the player any information that wo
 ## Related Project
 
 - [Where Is Waldo? — Backend](https://github.com/Michanoku/odin-waldo-backend)
+
+## Acknowledgements
+
+- [Lucide](https://lucide.dev/) – For the icons used throughout the application. Lucide is an open-source icon library released under the ISC License.
