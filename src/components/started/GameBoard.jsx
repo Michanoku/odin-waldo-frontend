@@ -185,7 +185,7 @@ export default function GameBoard({
         setPopupVisible(true);
       });
     }
-  }, [popupPosition?.x, popupPosition?.y, characters]);
+  }, [popupPosition?.x, popupPosition?.y]);
 
   function handleClick(event) {
     const imageElement = event.currentTarget;
