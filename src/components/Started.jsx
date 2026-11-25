@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
 import GameBoard from "./started/GameBoard.jsx";
-import SidePanel from "./started/SidePanel.jsx";
+import { OpenButton, SidePanel } from "./started/SidePanel.jsx";
 import Toast from "./started/Toast.jsx";
 import { startGame, tagCharacter } from "../api/api.js";
 import urls from "../api/urls.js";
@@ -16,6 +17,12 @@ export default function Started({ gameData, resetGame, finishGame }) {
   const [coordinates, setCoordinates] = useState(null);
   // Toast announcing correct or incorrect tag
   const [toast, setToast] = useState(null);
+  // Toggle Sidepanel
+  const [panelVisible, setPanelVisible] = useState(false);
+
+  function toggleSidepanel() {
+    setPanelVisible((prev) => !prev);
+  }
 
   async function handleCharacterTag(id) {
     try {
@@ -86,13 +93,21 @@ export default function Started({ gameData, resetGame, finishGame }) {
 
   return (
     <main className="mainStarted">
+      <OpenButton
+        toggleSidepanel={toggleSidepanel}
+        panelVisible={panelVisible}
+      />
       <GameBoard
         image={image}
         characters={characters}
         setCoordinates={setCoordinates}
         handleCharacterTag={handleCharacterTag}
       />
-      <SidePanel characters={characters} resetGame={resetGame} />
+      <SidePanel
+        characters={characters}
+        resetGame={resetGame}
+        panelVisible={panelVisible}
+      />
       {toast && <Toast toast={toast} setToast={setToast} />}
     </main>
   );

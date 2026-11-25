@@ -1,9 +1,15 @@
 /* The main element in the started game */
 .mainStarted {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
   align-items: start;
   width: 100%;
   min-height: 100dvh;
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .mainStarted {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
+  }
 }

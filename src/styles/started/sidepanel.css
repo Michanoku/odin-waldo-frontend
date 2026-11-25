@@ -1,14 +1,56 @@
 /* The side panel housing the quit button and the characters to find */
 .sidePanel {
-  padding-block: 1rem;
-  min-width: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-left: 3px solid var(--color-accent);
+  background:
+    radial-gradient(ellipse at 20% 10%, #55204d 0%, transparent 55%),
+    linear-gradient(135deg, #2d0b29, #42113c 50%, #35102f);
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  min-width: 50vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform: translateX(100%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    transform 240ms ease-in-out,
+    opacity 300ms ease-in-out,
+    visibility 300ms;
 }
 
-/* The character list showing all the characters*/
+.sidePanel.open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.openButton {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  color: var(--color-accent);
+  text-shadow: var(--shadow-text);
+  background:
+    radial-gradient(ellipse at 20% 10%, #55204d 0%, transparent 55%),
+    linear-gradient(135deg, #2d0b29, #42113c 50%, #35102f);
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-box-dark);
+}
+
+/* The character list showing all the characters */
 .characterList {
   flex: 0 0 auto;
   min-height: 0;
@@ -86,4 +128,22 @@
   cursor: pointer;
   color: var(--color-accent-hover);
   text-shadow: var(--shadow-box);
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .openButton {
+    display: none;
+  }
+  .sidePanel {
+    position: relative;
+    padding-bottom: 1rem;
+    min-width: 0;
+    opacity: 1;
+    transform: translateX(0);
+    background: transparent;
+    pointer-events: auto;
+    visibility: visible;
+    border-left: 0;
+  }
 }

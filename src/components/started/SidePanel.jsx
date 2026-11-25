@@ -1,4 +1,4 @@
-import { Check, LogOut } from "lucide-react";
+import { Check, LogOut, Menu, X } from "lucide-react";
 import urls from "../../api/urls.js";
 import "../../styles/started/sidepanel.css";
 
@@ -27,10 +27,19 @@ function QuitButton({ resetGame }) {
   );
 }
 
-// The side panel with character images and quit button
-export default function SidePanel({ characters, resetGame }) {
+export function OpenButton({ toggleSidepanel, panelVisible }) {
+  const buttonIcon = panelVisible ? <X size={32} /> : <Menu size={32} />;
   return (
-    <div className="sidePanel">
+    <button className="openButton" onClick={toggleSidepanel}>
+      {buttonIcon}
+    </button>
+  );
+}
+
+// The side panel with character images and quit button
+export function SidePanel({ characters, resetGame, panelVisible }) {
+  return (
+    <div className={`sidePanel ${panelVisible ? "open" : ""}`}>
       <div className="characterList">
         {characters.map((character) => (
           <CharacterImage character={character} key={character.id} />

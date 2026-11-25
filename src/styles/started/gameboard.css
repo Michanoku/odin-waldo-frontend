@@ -24,8 +24,8 @@
   flex-direction: column;
   z-index: 100;
   position: absolute;
+  width: max-content;
   opacity: 0;
-  transform: translate(2.5rem, -50%);
   transition: opacity 0.25s ease;
   pointer-events: none;
   background-color: var(--color-bg);
@@ -35,6 +35,7 @@
 }
 
 .characterButton {
+  white-space: nowrap;
   font-size: 1.25rem;
   border: 0;
   background: transparent;
@@ -55,13 +56,32 @@
 
 /* The container for the game image */
 .gameBoard {
+  position: relative;
   min-width: 0;
   width: 100%;
-  border-right: 3px solid var(--color-accent);
+  overflow: auto;
+  max-height: 70dvh;
 }
 
 .gameImage {
   display: block;
-  width: 100%;
+  width: auto;
+  min-width: 100%;
+  max-width: none;
   height: auto;
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .gameBoard {
+    overflow: visible;
+    max-height: none;
+    border-right: 3px solid var(--color-accent);
+  }
+
+  .gameImage {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }

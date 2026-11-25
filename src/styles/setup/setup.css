@@ -88,7 +88,7 @@
   padding-inline: 1rem;
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   align-items: center;
   min-width: 0;
 }
@@ -116,5 +116,10 @@
 
   .nameInput {
     font-size: 1.5rem;
+  }
+
+  .imageInfo {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
